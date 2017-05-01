@@ -4,23 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#b3e5fc"
     tools:context="com.madrapps.eyedropperapp.MainActivity">
 
     <ImageView
         android:id="@+id/colorSample"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:srcCompat="@drawable/colorwheel"
-        android:contentDescription="Image to pick color from"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="258dp"
+        android:layout_height="246dp"
         android:layout_marginBottom="130dp"
-        android:layout_marginRight="0dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/pick_color_from_image"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintVertical_bias="0.614"
+        app:srcCompat="@drawable/colorwheel" />
 
     <ImageView
         android:id="@+id/colorSlot"
@@ -28,11 +30,13 @@
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="32dp"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/colorSample"
         android:background="@color/colorAccent"
-        android:contentDescription="Something" />
+        android:contentDescription="@string/show_picked_color"
+        tools:targetApi="lollipop" />
 
 </android.support.constraint.ConstraintLayout>

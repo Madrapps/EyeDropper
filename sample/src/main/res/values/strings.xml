@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EyeDropperApp</string>
+    <string name="show_picked_color">Image to show the picked color</string>
+    <string name="pick_color_from_image">Image to pick color from</string>
 </resources>

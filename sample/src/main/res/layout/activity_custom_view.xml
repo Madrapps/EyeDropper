@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#b3e5fc"
     tools:context="com.madrapps.eyedropperapp.CustomViewActivity">
 
     <com.madrapps.eyedropperapp.views.CustomView
@@ -11,14 +12,17 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintBottom_toTopOf="@+id/colorSlot"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
         app:layout_constraintVertical_bias="0.0"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <ImageView
         android:id="@+id/colorSlot"
@@ -26,10 +30,13 @@
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
         android:background="@color/colorAccent"
+        android:contentDescription="@string/show_picked_color"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1" />
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:targetApi="lollipop" />
 </android.support.constraint.ConstraintLayout>
