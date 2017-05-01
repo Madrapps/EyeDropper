@@ -1,12 +1,17 @@
 # EyeDropper
 An android library to pick colors from any image loaded in an ImageView or anything drawn on a Custom View
 
+<img src="/preview/preview.gif" alt="preview" title="preview" width="255" height="395" align="right" vspace="20" />
+
 Download
 -----
 
 ```gradle
 repositories {
-  mavenCentral() // jcenter() works as well
+  // mavenCentral() or jcenter() works as well // Linking to mavenCentral IN_PROGRESS
+  maven {
+    url  "http://dl.bintray.com/madrapps/maven" 
+  }
 }
 
 dependencies {
