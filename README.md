@@ -8,7 +8,10 @@ Download
 
 ```gradle
 repositories {
-  mavenCentral() // jcenter() works as well
+  // mavenCentral() or jcenter() works as well // Linking to mavenCentral IN_PROGRESS
+  maven {
+    url  "http://dl.bintray.com/madrapps/maven" 
+  }
 }
 
 dependencies {
