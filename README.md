@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.madrapps:eyedropper:1.0.0'
+  compile 'com.github.madrapps:eyedropper:1.0.1'
 }
 ```
 
