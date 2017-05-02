@@ -8,7 +8,7 @@ Download
 
 ```gradle
 repositories {
-  jcenter()
+  jcenter() // or mavenCentral()
 }
 
 dependencies {
