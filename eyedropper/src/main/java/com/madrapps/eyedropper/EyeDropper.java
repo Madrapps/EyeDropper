@@ -7,7 +7,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -15,7 +14,6 @@ import android.widget.ImageView;
 
 public class EyeDropper {
 
-    private static final String TAG = "EyeDropper";
     private static final Matrix INVERT_MATRIX = new Matrix();
     private static final int NO_COLOR = Color.TRANSPARENT;
 
@@ -23,19 +21,12 @@ public class EyeDropper {
     private ColorSelectionListener colorListener;
     private int xTouch;
     private int yTouch;
+    private SelectionListener selectionListener;
 
     public EyeDropper(@NonNull View view, @NonNull ColorSelectionListener listener) {
         colorListener = listener;
         setTargetView(view);
         setTouchListener();
-    }
-
-    private void setTargetView(@NonNull final View targetView) {
-        this.targetView = targetView;
-        if (shouldDrawingCacheBeEnabled(targetView)) {
-            targetView.setDrawingCacheEnabled(true);
-            targetView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
-        }
     }
 
     private boolean shouldDrawingCacheBeEnabled(@NonNull View targetView) {
@@ -46,14 +37,28 @@ public class EyeDropper {
         targetView.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                final int action = event.getActionMasked();
                 xTouch = (int) event.getX();
                 yTouch = (int) event.getY();
-                final int colorSelected = getColorAtPoint(xTouch, yTouch);
-                Log.d(TAG, "Color = " + colorSelected);
-                notifyColorSelected(colorSelected);
+
+                handleSelectionStart(event, action);
+                notifyColorSelected(getColorAtPoint(xTouch, yTouch));
+                handleSelectionEnd(event, action);
                 return true;
             }
         });
+    }
+
+    private void handleSelectionEnd(MotionEvent event, int action) {
+        if (selectionListener != null && action == MotionEvent.ACTION_UP) {
+            selectionListener.onSelectionEnd(event);
+        }
+    }
+
+    private void handleSelectionStart(MotionEvent event, int action) {
+        if (selectionListener != null && action == MotionEvent.ACTION_DOWN) {
+            selectionListener.onSelectionStart(event);
+        }
     }
 
     private int getColorAtPoint(int x, int y) {
@@ -103,7 +108,44 @@ public class EyeDropper {
         }
     }
 
+    private void setTargetView(@NonNull final View targetView) {
+        this.targetView = targetView;
+        if (shouldDrawingCacheBeEnabled(targetView)) {
+            targetView.setDrawingCacheEnabled(true);
+            targetView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
+        }
+    }
+
+    /**
+     * Register a callback to be invoked when the color selection begins or ends.
+     */
+    public void setSelectionListener(@NonNull SelectionListener listener) {
+        this.selectionListener = listener;
+    }
+
+    /**
+     * Optional listener to listen to before and after selection events
+     */
+    public interface SelectionListener {
+        /**
+         * Invoked when the user touches the view to select a color. This corresponds to the {@link
+         * MotionEvent#ACTION_DOWN} event.
+         */
+        void onSelectionStart(@NonNull MotionEvent event);
+
+        /**
+         * Invoked when the color selection is finished. This corresponds to the {@link MotionEvent#ACTION_UP}
+         * event.
+         */
+        void onSelectionEnd(@NonNull MotionEvent event);
+    }
+
     public interface ColorSelectionListener {
+        /**
+         * Invoked when a color is selected from the given view
+         *
+         * @param color the selected color
+         */
         void onColorSelected(@ColorInt int color);
     }
 }

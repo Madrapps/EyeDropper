@@ -3,7 +3,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
 
 
-def projectVersion = "1.0.1"
+def projectVersion = "1.1.0"
 def projectGroupId = "com.github.madrapps"
 def siteUrl = 'https://github.com/Madrapps/EyeDropper'
 def gitUrl = 'https://github.com/Madrapps/EyeDropper.git'
@@ -19,7 +19,7 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 25
-        versionCode 2
+        versionCode 3
         versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
