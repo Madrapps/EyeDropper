@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
 
@@ -40,6 +41,7 @@ dependencies {
     })
     compile 'com.android.support:support-annotations:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 install {
@@ -101,8 +103,8 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-    user = properties.getProperty("bintray.user");
-    key = properties.getProperty("bintray.apikey");
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
 
     configurations = ['archives']
     pkg {
@@ -119,4 +121,7 @@ bintray {
             }
         }
     }
+}
+repositories {
+    mavenCentral()
 }
