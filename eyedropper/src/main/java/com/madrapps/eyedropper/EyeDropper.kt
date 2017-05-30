@@ -77,12 +77,16 @@ class EyeDropper(val view: View, val listener: ColorSelectionListener) {
     interface SelectionListener {
         /**
          * Invoked when the user touches the view to select a color. This corresponds to the [ ][MotionEvent.ACTION_DOWN] event.
+         *
+         * @param event the down motion event
          */
         fun onSelectionStart(event: MotionEvent)
 
         /**
          * Invoked when the color selection is finished. This corresponds to the [MotionEvent.ACTION_UP]
          * event.
+         *
+         * @param event the up motion event
          */
         fun onSelectionEnd(event: MotionEvent)
     }
