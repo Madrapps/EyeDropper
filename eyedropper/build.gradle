@@ -100,9 +100,6 @@ artifacts {
     archives sourcesJar
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 bintray {
     user = System.getenv('bintray_user')
     key = System.getenv('bintray_apikey')
