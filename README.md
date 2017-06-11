@@ -1,5 +1,6 @@
 # EyeDropper
 [![Build Status](https://travis-ci.org/Madrapps/EyeDropper.svg?branch=master)](https://travis-ci.org/Madrapps/EyeDropper)
+[ ![Download](https://api.bintray.com/packages/madrapps/maven/com.github.madrapps%3Aeyedropper/images/download.svg) ](https://bintray.com/madrapps/maven/com.github.madrapps%3Aeyedropper/_latestVersion)
 
 An android library to pick colors from any image loaded in an ImageView or anything drawn on a Custom View
 
