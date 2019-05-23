@@ -2,14 +2,13 @@ package com.madrapps.eyedropperapp;
 
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.madrapps.eyedropper.EyeDropper;
-
-import org.jetbrains.annotations.NotNull;
 
 public class CustomViewActivity extends AppCompatActivity {
 
@@ -31,12 +30,12 @@ public class CustomViewActivity extends AppCompatActivity {
 
         eyeDropper.setSelectionListener(new EyeDropper.SelectionListener() {
             @Override
-            public void onSelectionStart(@NotNull MotionEvent event) {
+            public void onSelectionStart(@NonNull MotionEvent event) {
                 Log.d("MainActivity", "selection started");
             }
 
             @Override
-            public void onSelectionEnd(@NotNull MotionEvent event) {
+            public void onSelectionEnd(@NonNull MotionEvent event) {
                 Log.d("MainActivity", "selection ended");
             }
         });
