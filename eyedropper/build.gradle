@@ -14,11 +14,11 @@ version = projectVersion
 group = projectGroupId
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 28
+        minSdkVersion 15
+        targetSdkVersion 27
         versionCode 4
         versionName version
 

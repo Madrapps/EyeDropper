@@ -12,9 +12,10 @@ import android.view.View
 import android.view.View.DRAWING_CACHE_QUALITY_LOW
 import android.widget.ImageView
 
-class EyeDropper(val view: View, val listener: ColorSelectionListener) {
-    private val NO_COLOR = Color.TRANSPARENT
-    private val INVERT_MATRIX = Matrix()
+private const val NO_COLOR = Color.TRANSPARENT
+private val INVERT_MATRIX = Matrix()
+
+class EyeDropper(private val view: View, private val listener: ColorSelectionListener) {
 
     /**
      * Register a callback to be invoked when the color selection begins or ends.
@@ -29,7 +30,7 @@ class EyeDropper(val view: View, val listener: ColorSelectionListener) {
         setTouchListener()
     }
 
-    fun setTouchListener() {
+    private fun setTouchListener() {
         view.setOnTouchListener { _, event ->
             if (event.down()) selectionListener?.onSelectionStart(event)
             notifyColorSelection(event.x.toInt(), event.y.toInt())
@@ -38,23 +39,22 @@ class EyeDropper(val view: View, val listener: ColorSelectionListener) {
         }
     }
 
-    fun getColorAtPoint(x: Int, y: Int): Int {
-        when (view) {
-            is ImageView -> return handleIfImageView(view, x, y)
-            else -> return getPixelAtPoint(view.drawingCache, x, y)
+    private fun getColorAtPoint(x: Int, y: Int): Int {
+        return when (view) {
+            is ImageView -> handleIfImageView(view, x, y)
+            else -> getPixelAtPoint(view.drawingCache, x, y)
         }
     }
 
-    fun handleIfImageView(view: ImageView, x: Int, y: Int): Int {
-        val drawable = view.drawable
-        when (drawable) {
+    private fun handleIfImageView(view: ImageView, x: Int, y: Int): Int {
+        return when (val drawable = view.drawable) {
             is BitmapDrawable -> {
                 view.imageMatrix.invert(INVERT_MATRIX)
                 val mappedPoints = floatArrayOf(x.toFloat(), y.toFloat())
                 INVERT_MATRIX.mapPoints(mappedPoints)
-                return getPixelAtPoint(drawable.bitmap, mappedPoints[0].toInt(), mappedPoints[1].toInt())
+                getPixelAtPoint(drawable.bitmap, mappedPoints[0].toInt(), mappedPoints[1].toInt())
             }
-            else -> return NO_COLOR
+            else -> NO_COLOR
         }
     }
 
@@ -65,7 +65,7 @@ class EyeDropper(val view: View, val listener: ColorSelectionListener) {
         return NO_COLOR
     }
 
-    fun notifyColorSelection(x: Int, y: Int) {
+    private fun notifyColorSelection(x: Int, y: Int) {
         val colorAtPoint = getColorAtPoint(x, y)
         listener.onColorSelected(colorAtPoint)
     }
@@ -102,7 +102,7 @@ class EyeDropper(val view: View, val listener: ColorSelectionListener) {
 }
 
 fun Bitmap.isValidCoordinate(x: Int, y: Int): Boolean {
-    return x in 1..(width - 1) && y in 1..(height - 1)
+    return x in 1 until width && y in 1 until height
 }
 
 fun View.shouldDrawingCacheBeEnabled(): Boolean = (this !is ImageView) && !isDrawingCacheEnabled
