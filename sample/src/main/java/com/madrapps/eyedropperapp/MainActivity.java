@@ -9,8 +9,6 @@ import android.view.View;
 
 import com.madrapps.eyedropper.EyeDropper;
 
-import org.jetbrains.annotations.NotNull;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -31,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         eyeDropper.setSelectionListener(new EyeDropper.SelectionListener() {
             @Override
-            public void onSelectionStart(@NotNull MotionEvent event) {
+            public void onSelectionStart(MotionEvent event) {
                 Log.d("MainActivity", "selection started");
             }
 
             @Override
-            public void onSelectionEnd(@NotNull MotionEvent event) {
+            public void onSelectionEnd(MotionEvent event) {
                 Log.d("MainActivity", "selection ended");
             }
         });
